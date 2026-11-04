@@ -4,9 +4,13 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import dj_database_url
 
-load_dotenv()
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Cargar variables de .env y .env.local tanto de la raíz del repositorio como de backend/
+load_dotenv(BASE_DIR.parent / '.env.local')
+load_dotenv(BASE_DIR.parent / '.env')
+load_dotenv(BASE_DIR / '.env')
+load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1')

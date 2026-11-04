@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+}
+
+html {
+  font-size: 17.5px; /* Aumento general del tamaño de texto en todas las pantallas */
+}
+
+/* Modos de accesibilidad para tamaño de texto */
+html[data-text-size="normal"] {
+  font-size: 16px;
+}
+
+html[data-text-size="grande"] {
+  font-size: 17.5px;
+}
+
+html[data-text-size="muy-grande"] {
+  font-size: 19.5px;
+}
+
+/* ==========================================================
+   ESTRUCTURA DE NAVEGACIÓN FIJA (Header y Sidebar)
+   Previene que la cabecera y barra lateral se inflen con el aumento de fuente
+   ========================================================== */
+header {
+  height: 60px !important;
+  min-height: 60px !important;
+  max-height: 60px !important;
+  font-size: 14px !important;
+}
+
+header * {
+  font-size: inherit;
+}
+
+header button, header a, header span {
+  font-size: 13px !important;
+}
+
+header h2 {
+  font-size: 15px !important;
+}
+
+aside {
+  font-size: 14px !important;
+}
+
+aside * {
+  font-size: inherit;
+}
+
+aside nav a {
+  font-size: 13.5px !important;
+}
+
+/* ==========================================================
+   ELEMENTOS DEL CALENDARIO (Escalado dinámico y legible)
+   ========================================================== */
+.calendar-event-item {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+html[data-text-size="normal"] .calendar-event-item {
+  font-size: 0.8125rem; /* ~13px */
+}
+
+html[data-text-size="grande"] .calendar-event-item {
+  font-size: 0.925rem; /* ~16.2px */
+}
+
+html[data-text-size="muy-grande"] .calendar-event-item {
+  font-size: 1.05rem; /* ~20.5px */
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+/* ==========================================================
+   TEMA OSCURO (DARK MODE)
+   ========================================================== */
+[data-theme="oscuro"] {
+  color-scheme: dark;
+}
+
+[data-theme="oscuro"] body {
+  background-color: #0b1120 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="oscuro"] .bg-gray-100 {
+  background-color: #0b1120 !important;
+}
+
+[data-theme="oscuro"] .bg-white {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="oscuro"] .bg-gray-50,
+[data-theme="oscuro"] .bg-slate-50,
+[data-theme="oscuro"] .bg-slate-50\/50,
+[data-theme="oscuro"] .bg-slate-100 {
+  background-color: #152033 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="oscuro"] header {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="oscuro"] .text-gray-900,
+[data-theme="oscuro"] .text-gray-800,
+[data-theme="oscuro"] .text-slate-900,
+[data-theme="oscuro"] .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+[data-theme="oscuro"] .text-gray-700,
+[data-theme="oscuro"] .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="oscuro"] .text-gray-600,
+[data-theme="oscuro"] .text-gray-500,
+[data-theme="oscuro"] .text-slate-600,
+[data-theme="oscuro"] .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+[data-theme="oscuro"] .border-gray-200,
+[data-theme="oscuro"] .border-gray-300,
+[data-theme="oscuro"] .border-gray-100,
+[data-theme="oscuro"] .border-slate-200,
+[data-theme="oscuro"] .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+[data-theme="oscuro"] .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #334155 !important;
+}
+
+[data-theme="oscuro"] input,
+[data-theme="oscuro"] select,
+[data-theme="oscuro"] textarea {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="oscuro"] input::placeholder,
+[data-theme="oscuro"] textarea::placeholder {
+  color: #64748b !important;
+}
+
+[data-theme="oscuro"] .hover\:bg-gray-50:hover,
+[data-theme="oscuro"] .hover\:bg-gray-100:hover {
+  background-color: #27354f !important;
+}
+
+/* ==========================================================
+   TEMA LECTURA (SEPIA / PAPEL CÁLIDO)
+   ========================================================== */
+[data-theme="lectura"] {
+  color-scheme: light;
+}
+
+[data-theme="lectura"] body {
+  background-color: #f5ede1 !important;
+  color: #36291e !important;
+}
+
+[data-theme="lectura"] .bg-gray-100 {
+  background-color: #f5ede1 !important;
+}
+
+[data-theme="lectura"] .bg-white {
+  background-color: #fdfaf4 !important;
+  color: #36291e !important;
+}
+
+[data-theme="lectura"] .bg-gray-50,
+[data-theme="lectura"] .bg-slate-50,
+[data-theme="lectura"] .bg-slate-50\/50,
+[data-theme="lectura"] .bg-slate-100 {
+  background-color: #ede2cf !important;
+  color: #3e3025 !important;
+}
+
+[data-theme="lectura"] aside {
+  background-color: #2a2017 !important;
+  border-color: #433324 !important;
+}
+
+[data-theme="lectura"] header {
+  background-color: #fdfaf4 !important;
+  border-color: #e5d8c3 !important;
+}
+
+[data-theme="lectura"] .text-gray-900,
+[data-theme="lectura"] .text-gray-800,
+[data-theme="lectura"] .text-slate-900,
+[data-theme="lectura"] .text-slate-800 {
+  color: #2e2217 !important;
+}
+
+[data-theme="lectura"] .text-gray-700,
+[data-theme="lectura"] .text-slate-700 {
+  color: #4b3b2c !important;
+}
+
+[data-theme="lectura"] .text-gray-600,
+[data-theme="lectura"] .text-gray-500,
+[data-theme="lectura"] .text-slate-600,
+[data-theme="lectura"] .text-slate-500 {
+  color: #786452 !important;
+}
+
+[data-theme="lectura"] .border-gray-200,
+[data-theme="lectura"] .border-gray-300,
+[data-theme="lectura"] .border-gray-100,
+[data-theme="lectura"] .border-slate-200,
+[data-theme="lectura"] .border-slate-300 {
+  border-color: #e5d8c3 !important;
+}
+
+[data-theme="lectura"] .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e5d8c3 !important;
+}
+
+[data-theme="lectura"] input,
+[data-theme="lectura"] select,
+[data-theme="lectura"] textarea {
+  background-color: #fdf6ec !important;
+  color: #2e2217 !important;
+  border-color: #dcceb6 !important;
+}
+
+[data-theme="lectura"] input::placeholder,
+[data-theme="lectura"] textarea::placeholder {
+  color: #9c8a77 !important;
+}
+
+[data-theme="lectura"] .hover\:bg-gray-50:hover,
+[data-theme="lectura"] .hover\:bg-gray-100:hover {
+  background-color: #f2e6d2 !important;
+}

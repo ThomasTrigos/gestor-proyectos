@@ -1,0 +1,46 @@
+services:
+  # --------------------------------------------------------------------------
+  # 1. Backend Web Service (Django + Gunicorn + WhiteNoise)
+  # --------------------------------------------------------------------------
+  - type: web
+    name: gestor-proyectos-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: "bash ./build.sh"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false # Pega aquí la cadena de conexión de Neon.tech (postgresql://...)
+      - key: RUN_SEED_DATA
+        value: "true" # Si es "true", puebla automáticamente los usuarios y proyectos en el primer despliegue
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,localhost,127.0.0.1"
+
+  # --------------------------------------------------------------------------
+  # 2. Frontend Static Site (React Vite SPA)
+  # --------------------------------------------------------------------------
+  - type: web
+    name: gestor-proyectos-frontend
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: "./dist"
+    pullRequestPreviewsEnabled: false
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: gestor-proyectos-backend
+          property: host

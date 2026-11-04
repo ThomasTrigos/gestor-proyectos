@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gestor_proyectos
+      POSTGRES_USER: gestor_user
+      POSTGRES_PASSWORD: gestor_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gestor_user -d gestor_proyectos"]
+      interval: 4s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: gestor_proyectos
+      DB_USER: gestor_user
+      DB_PASSWORD: gestor_password
+      DB_HOST: db
+      DB_PORT: 5432
+      SECRET_KEY: ${SECRET_KEY:-django-secret-key-cambiar-en-produccion}
+      DEBUG: ${DEBUG:-False}
+    volumes:
+      - ./backend:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             (gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 || python manage.py runserver 0.0.0.0:8000)"
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    command: npm run dev -- --host
+
+volumes:
+  postgres_data:
+  media_data:

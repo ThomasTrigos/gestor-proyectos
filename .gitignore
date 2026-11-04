@@ -1,0 +1,58 @@
+# Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Entornos virtuales & variables sensibles
+.env
+.venv/
+env/
+venv/
+ENV/
+tokens_test.json
+
+# Base de datos local SQLite y archivos subidos/estaticos locales
+*.sqlite3
+*.sqlite3-journal
+backend/staticfiles/
+backend/media/
+media/
+staticfiles/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node / Frontend
+frontend/node_modules/
+node_modules/
+frontend/dist/
+.oxlintrc.json.cache
+
+# IDEs y SO
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini

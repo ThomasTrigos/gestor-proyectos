@@ -1,3 +1,8 @@
+import os
+import sys
+from django.http import JsonResponse
+from django.db import connection
+from django.contrib.auth.models import User
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -9,7 +14,44 @@ from apps.personal.views import (
 from apps.financiacion.views import CuotaPagoViewSet
 from apps.core.views import RecordatorioViewSet, ConfiguracionEmailViewSet, ConfiguracionIAViewSet
 
+def health_check(request):
+    db_config = settings.DATABASES['default']
+    engine = db_config.get('ENGINE', '')
+    host = db_config.get('HOST', '')
+    name = db_config.get('NAME', '')
+    
+    is_connected = False
+    users_list = []
+    error_msg = None
+    
+    try:
+        connection.ensure_connection()
+        is_connected = True
+        users_list = list(User.objects.values_list('username', flat=True))
+    except Exception as e:
+        error_msg = str(e)
+        
+    return JsonResponse({
+        'status': 'ok' if (is_connected and not error_msg) else 'error',
+        'database': {
+            'engine': engine,
+            'is_postgresql': 'postgresql' in engine,
+            'host': host if 'postgresql' in engine else 'local',
+            'name': str(name),
+            'connected': is_connected,
+            'total_users': len(users_list),
+            'users': users_list,
+            'error': error_msg
+        },
+        'environment': {
+            'debug': settings.DEBUG,
+            'database_url_configured': bool(os.getenv('DATABASE_URL')),
+            'python_version': sys.version.split()[0]
+        }
+    })
+
 urlpatterns = [
+    path('api/health/', health_check, name='health_check'),
     path('admin/', admin.site.urls),
     path('api/auth/login/', LoginView.as_view(), name='auth_login'),
     path('api/auth/logout/', LogoutView.as_view(), name='auth_logout'),

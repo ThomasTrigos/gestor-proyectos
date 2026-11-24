@@ -24,8 +24,13 @@ export default function LoginPage() {
       await login({ identificador, password });
       navigate('/');
     } catch (err: any) {
-      const serverMsg = err?.response?.data?.error;
-      setError(serverMsg || 'Credenciales inválidas. Compruebe el usuario o contraseña.');
+      if (!err?.response) {
+        setError(`Error de conexión con el backend (${err?.message || 'Network Error'}). Verifique que el servicio backend esté 'Live' en Render.`);
+      } else if (err.response.status === 401) {
+        setError(err.response.data?.error || 'Credenciales inválidas. Verifique el usuario/email y la contraseña.');
+      } else {
+        setError(`Error del servidor (${err.response.status}): ${err.response.data?.error || err.message}`);
+      }
     } finally {
       setIsSubmitting(false);
     }

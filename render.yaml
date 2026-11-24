@@ -39,7 +39,4 @@ services:
         destination: "/index.html"
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: gestor-proyectos-backend
-          property: host
+        value: "https://gestor-proyectos-backend-gs00.onrender.com/api"

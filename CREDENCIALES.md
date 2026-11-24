@@ -8,12 +8,12 @@ Documento de referencia para el acceso de los distintos roles y cuentas a la pla
 
 | Rol en el Sistema | Nombre y Cargo | Usuario | Correo Electrónico | Contraseña |
 | :--- | :--- | :--- | :--- | :--- |
-| **Administrador (Superuser)** | Admin General (*SysAdmin*) | `admin` | `admin@gestor.com` | `AdminPassword2026!` |
-| **Recursos Humanos (RRHH)** | Valeria Martínez (*Líder RRHH y Operaciones*) | `rrhh` | `rrhh@empresa.com` | `RrhhPassword2026!` |
-| **Gerente de Operaciones** | Esteban Gómez (*Director de Operaciones*) | `gerente` | `gerente@empresa.com` | `GerentePassword2026!` |
-| **Líder Técnico Dev** | Pedro Sánchez (*Fullstack Lead*) | `pedro.dev` | `pedro.dev@empresa.com` | `EmpleadoPassword2026!` |
-| **Especialista Frontend** | Lucía Fernández (*Frontend React*) | `lucia.dev` | `lucia.dev@empresa.com` | `EmpleadoPassword2026!` |
-| **DevOps & Backend** | Tomás Navarro (*Cloud & DevOps*) | `tomas.dev` | `tomas.dev@empresa.com` | `EmpleadoPassword2026!` |
+| **Administrador (Superuser)** | Admin General (*SysAdmin*) | `admin` | `admin@gestor.com` | `admin1234` |
+| **Recursos Humanos (RRHH)** | Valeria Martínez (*Líder RRHH y Operaciones*) | `rrhh` | `rrhh@empresa.com` | `rrhh1234` |
+| **Gerente de Operaciones** | Esteban Gómez (*Director de Operaciones*) | `gerente` | `gerente@empresa.com` | `gerente1234` |
+| **Líder Técnico Dev** | Pedro Sánchez (*Fullstack Lead*) | `pedro.dev` | `pedro.dev@empresa.com` | `pedro1234` |
+| **Especialista Frontend** | Lucía Fernández (*Frontend React*) | `lucia.dev` | `lucia.dev@empresa.com` | `lucia1234` |
+| **DevOps & Backend** | Tomás Navarro (*Cloud & DevOps*) | `tomas.dev` | `tomas.dev@empresa.com` | `tomas1234` |
 
 > **Nota:** En la pantalla de inicio de sesión (`/login`), puede identificarse tanto con el **nombre de usuario** (ej. `rrhh`) como con el **correo electrónico** (ej. `rrhh@empresa.com`).
 
